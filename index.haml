@@ -1,0 +1,51 @@
+!!! 5
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %title Space Invaders
+    %link{rel: "stylesheet", href: "style.css"}
+  %body
+    
+    #cont
+
+      .top-info
+        #lives
+          %img{src: "images/life.png"}
+          %img{src: "images/life.png"}
+          %img{src: "images/life.png"}
+        .info-level
+          LEVEL
+          #info_level 1
+        #mute MUTE
+
+      #intro
+        .controls
+          %img{src: "images/keys.png"}
+          .space Shoot with spacebar
+          .arrows Move with arrow keys
+        .start Press space to start
+
+      #loading
+        .title loading...
+
+      #game_over
+        .bg
+        .center
+          .title GAME OVER
+          .continue Press space to continue
+
+      #levelup
+        .bg
+        .title
+          LEVEL
+          #ingame_level 1
+
+
+      %canvas#game_screen{height: 500, width: 1000}
+        Your browser does not support canvas technology. Please try again with a different browser.
+
+      
+
+    
+    %script{:src => "sounds/howler.js"}
+    %script{:src => "script.js"}
