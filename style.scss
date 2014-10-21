@@ -29,12 +29,14 @@ body {
 	display: block;
 	margin: 0 auto;
 	width: 900px;
+	min-width: 768px;
 	margin-top: 20px;
 	box-shadow: 0 0 100px 0 rgba(#000, 0.7);
 }
 
 #game_screen {
 	z-index: 1;
+	min-width: 768px;
 }
 
 .top-info {
@@ -52,6 +54,7 @@ body {
 #lives {
 	float: left;
 	height: 40px;
+	margin-right: 40px;
 	img {
 		margin-right: 5px;
 		display: inline-block;
@@ -61,23 +64,35 @@ body {
 	}
 }
 
-.info-level, #mute {
+.info-level, #mute, .github {
+	margin-left: 25px;
+	float: right;
 	position: relative;
 	top: 4px;
-	float: right;
 	font-size: 26px;
 	font-weight: bold;
 	color: #444;
 }
 
-#mute {
-	margin-right: 40px;
-	cursor: pointer;
+
+.info-level {
 }
 
 #info_level {
 	display: inline;
 }
+
+#mute {
+	float: right;
+	cursor: pointer;
+}
+
+.github {
+	display: block;
+	float: right;
+	text-decoration: none;
+}
+
 
 @mixin transition($what, $time: 0.25s, $easing: ease, $delay: 0s) {
   -webkit-transition: $what $time $easing $delay;

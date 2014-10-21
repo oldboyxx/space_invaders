@@ -31,6 +31,8 @@ window.onload = ->
       @done++
       startGame() if @done == @required
 
+
+
   imgRepo =
     images: []
     loaded: 0
@@ -59,6 +61,7 @@ window.onload = ->
   imgRepo.loadImages()
 
 
+
   soundRepo =
     shoot: new Howl
       urls: ['sounds/shoot.ogg', 'sounds/shoot.mp3']
@@ -76,59 +79,60 @@ window.onload = ->
 
 
 
+  contDOM = document.getElementById("cont")
+  infoOverDOM = document.getElementById("game_over")
+  infoLevelupDOM = document.getElementById("levelup")
+  livesDOM = document.getElementById("lives")
+  levelDOM = document.getElementById("ingame_level")
+  infoLevelDOM = document.getElementById("info_level")
+  muteDOM = document.getElementById("mute")
+  canvasDOM = document.getElementById("game_screen")
+
+  canvas = canvasDOM.getContext("2d")
+
+  game =
+    width: 900
+    height: 630
+    level: 0
+    lives: 3
+    timeOfLastDeath: 0
+    deltaLastTime: 0
+    paused: levelup: false, over: false
+    muted: false
+  
+  canvasDOM.width = game.width
+  canvasDOM.height = game.height
+
+  game.setSize = ->
+    inWidth = window.innerWidth
+    inHeight = window.innerHeight
+    hRatio = (inHeight - 100) / game.height
+    hRatio = 1.1 if hRatio > 1.1
+    game.scale hRatio
+    game.scale (inWidth - 40) / game.width if inWidth - 20 < +canvasDOM.style.width.replace "px", ""
+
+  game.scale = (size) ->
+    contDOM.style.width = game.width * size + "px"
+    canvasDOM.style.width = game.width * size + "px"
+    canvasDOM.style.height = game.height * size + "px"
+
+  window.addEventListener("resize", ->
+    game.setSize()
+  , false)
+
+  game.setSize()
+
+
+
   startGame = ->
 
-    contDOM = document.getElementById("cont")
-    infoOverDOM = document.getElementById("game_over")
-    infoLevelupDOM = document.getElementById("levelup")
-    livesDOM = document.getElementById("lives")
-    levelDOM = document.getElementById("ingame_level")
-    infoLevelDOM = document.getElementById("info_level")
-    muteDOM = document.getElementById("mute")
-    canvasDOM = document.getElementById("game_screen")
-
-    canvas = canvasDOM.getContext("2d")
-
+    
     startTime = Date.now()
+    game.time = ->
+      Date.now() - startTime
 
     rand = (min, max) ->
       Math.floor(Math.random() * (max - min + 1)) + min
-
-    game =
-      width: 900
-      height: 630
-      level: 0
-      lives: 3
-      timeOfLastDeath: 0
-      deltaLastTime: 0
-      paused: levelup: false, over: false
-      muted: false
-      time: ->
-        Date.now() - startTime
-    
-    canvasDOM.width = game.width
-    canvasDOM.height = game.height
-
-
-    game.setSize = ->
-      inWidth = window.innerWidth
-      inHeight = window.innerHeight
-      hRatio = (inHeight - 100) / game.height
-      hRatio = 1.1 if hRatio > 1.1
-      game.scale hRatio
-      game.scale (inWidth - 40) / game.width if inWidth - 20 < +canvasDOM.style.width.replace "px", ""
-
-    game.scale = (size) ->
-      contDOM.style.width = game.width * size + "px"
-      canvasDOM.style.width = game.width * size + "px"
-      canvasDOM.style.height = game.height * size + "px"
-
-    window.addEventListener("resize", ->
-      game.setSize()
-    , false)
-
-    game.setSize()
-
 
 
     class Sprite
