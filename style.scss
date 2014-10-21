@@ -1,3 +1,29 @@
+@mixin transition($what, $time: 0.25s, $easing: ease, $delay: 0s) {
+  -webkit-transition: $what $time $easing $delay;
+  -moz-transition: $what $time $easing $delay;
+  -o-transition: $what $time $easing $delay;
+  -ms-transition: $what $time $easing $delay;
+  transition: $what $time $easing $delay;
+}
+
+@mixin box-sizing($sizing) {
+  -moz-box-sizing: $sizing;
+  -webkit-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+*, *:after, *:before {
+	@include box-sizing(border-box);
+}
+
+@mixin transform($what) {
+  -webkit-transform: $what;
+  -moz-transform: $what;
+  -o-transform: $what;
+  -ms-transform: $what;
+  transform: $what;
+}
+
 $blue: #3498db;
 $red: #e74c3c;
 
@@ -16,12 +42,14 @@ $red: #e74c3c;
 }
 
 body {
-	overflow: hidden;
 	background-color: #000;
 	background-image: url("images/site-bg.jpg");
 	background-size: cover;
 	background-position: center;
 	font-family: "Arial";
+	margin: 0;
+	padding: 0;
+	padding-top: 20px;
 }
 
 #cont {
@@ -29,7 +57,6 @@ body {
 	display: block;
 	margin: 0 auto;
 	width: 900px;
-	margin-top: 20px;
 	box-shadow: 0 0 100px 0 rgba(#000, 0.7);
 }
 
@@ -52,7 +79,7 @@ body {
 #lives {
 	float: left;
 	height: 40px;
-	margin-right: 40px;
+	padding-right: 40px;
 	img {
 		margin-right: 5px;
 		display: inline-block;
@@ -63,7 +90,7 @@ body {
 }
 
 .info-level, #mute, .github {
-	margin-left: 25px;
+	padding-left: 25px;
 	float: right;
 	position: relative;
 	top: 4px;
@@ -91,23 +118,6 @@ body {
 	text-decoration: none;
 }
 
-
-@mixin transition($what, $time: 0.25s, $easing: ease, $delay: 0s) {
-  -webkit-transition: $what $time $easing $delay;
-  -moz-transition: $what $time $easing $delay;
-  -o-transition: $what $time $easing $delay;
-  -ms-transition: $what $time $easing $delay;
-  transition: $what $time $easing $delay;
-}
-
-@mixin transform($what) {
-  -webkit-transform: $what;
-  -moz-transform: $what;
-  -o-transform: $what;
-  -ms-transform: $what;
-  transform: $what;
-}
-
 .stretch {
 	position: absolute;
 	top: 0;
@@ -116,12 +126,23 @@ body {
 	height: 100%;
 }
 
+#game_over, #levelup, #loading {
+	overflow: hidden;
+	&:after {
+		content: "";
+		height: 100%;
+		width: 0;
+		vertical-align: middle;
+		display: inline-block;
+	}
+}
+
 #game_over, #levelup, #loading, #intro {
 	@extend .stretch;
 	z-index: 2;
 	font-weight: bold;
 	text-align: center;
-	margin-top: 50px;
+	padding-top: 50px;
 	opacity: 0;
 	@include transform(scale(0.8));
 	@include transition(all, 0.35s);
@@ -129,14 +150,15 @@ body {
 		opacity: 1;
 		@include transform(scale(1));
 	}
-	&:after {
-		content: "";
-		height: 100%;
-		vertical-align: middle;
-		display: inline-block;
-	}
+	
 	.title {
 		font-size: 120px;
+		@media screen and (max-height: 650px) {
+			font-size: 100px;
+		}
+		@media screen and (max-height: 550px) {
+			font-size: 70px;
+		}
 	}
 	.bg {
 		z-index: -1;
@@ -150,10 +172,10 @@ body {
 	font-size: 20px;
 	font-weight: normal;
 	.controls {
+		display: inline-block;
 		position: relative;
 		right: 12px;
 		width: 551px;
-		margin: 0 auto;
 		padding-top: 100px;
 		text-align: left;
 		opacity: 0.75;
@@ -176,11 +198,15 @@ body {
 		left: 63px;
 	}
 	.start {
+		display: inline-block;
 		padding-top: 100px;
-		text-align: center;
 		font-size: 58px;
 		color: $blue;
 		font-weight: bold;
+		@media screen and (max-height: 550px) {
+			font-size: 36px;
+			padding-top: 20px;
+		}
 	}
 
 }
@@ -210,7 +236,7 @@ body {
 	}
 	.title {
 		color: $red;
-		margin-bottom: 20px;
+		padding-bottom: 20px;
 	}
 	.continue {
 		font-size: 32px;

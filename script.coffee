@@ -10,19 +10,6 @@ window.onload = ->
   )()
 
 
-  introDOM = document.getElementById("intro")
-  loadingDOM = document.getElementById("loading")
-
-  introDOM.className = "active"
-
-  document.addEventListener("keydown", userConfirmed = (e) ->
-    if e.keyCode == 32
-      document.removeEventListener "keydown", userConfirmed
-      loadingDOM.className = "active"
-      introDOM.className = ""
-      requirements.load()
-  , false)
-
 
   requirements =
     done: 0
@@ -121,6 +108,21 @@ window.onload = ->
   , false)
 
   game.setSize()
+
+
+
+  introDOM = document.getElementById("intro")
+  loadingDOM = document.getElementById("loading")
+
+  introDOM.className = "active"
+
+  document.addEventListener("keydown", userConfirmed = (e) ->
+    if e.keyCode == 32
+      document.removeEventListener "keydown", userConfirmed
+      loadingDOM.className = "active"
+      introDOM.className = ""
+      requirements.load()
+  , false)
 
 
 
