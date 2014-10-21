@@ -29,14 +29,12 @@ body {
 	display: block;
 	margin: 0 auto;
 	width: 900px;
-	min-width: 768px;
 	margin-top: 20px;
 	box-shadow: 0 0 100px 0 rgba(#000, 0.7);
 }
 
 #game_screen {
 	z-index: 1;
-	min-width: 768px;
 }
 
 .top-info {
