@@ -335,20 +335,21 @@ window.onload = ->
 
       @shoot = ->
         for invader in Invader.invaders
-          dontShoot = false
 
-          for i in Invader.invaders
-            if invader.top < i.top && (invader.left < i.left + invader.width && invader.left + invader.width > i.left)
-              dontShoot = true
+          if rand(-1000, 2+game.level/2) > -1
 
-          if rand(-1000, 2+game.level/2) > -1 && !dontShoot
+            canShoot = true
+            for i in Invader.invaders
+              if invader.top < i.top && (invader.left < i.left + invader.width && invader.left + invader.width > i.left)
+                canShoot = false
             
-            size = 18
-            top = invader.top + invader.height
-            left = invader.left + invader.width/2 - size/2  
-            horzMovement = rand(-10, 10) / 10
-            sprite = new Sprite imgRepo.get("images/sprite.png"), 222, [size,size], [left,top], [size,size], 200, false, false, 18
-            new Bullet sprite, size, size, top, left, false, horzMovement
+            if canShoot
+              size = 18
+              top = invader.top + invader.height
+              left = invader.left + invader.width/2 - size/2  
+              horzMovement = rand(-10, 10) / 10
+              sprite = new Sprite imgRepo.get("images/sprite.png"), 222, [size,size], [left,top], [size,size], 200, false, false, 18
+              new Bullet sprite, size, size, top, left, false, horzMovement
 
 
 
