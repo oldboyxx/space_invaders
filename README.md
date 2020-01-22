@@ -1,6 +1,5 @@
-I wanted to learn canvas basics so I decided to make my first javascript game... with lots of explosions.
+Canvas based space shooter written in ~600 lines. I hacked this together during my early days of javascripting, and left it here for shame. Hope you like spaghetti 🍝
 
-[Give it a go!](http://oldboyfx.com/space_shooter/) I made it to level 25.
+[Give it a go!](https://spaceinvaders.getivor.com/) I made it to level 25.
 
-It's written in vanilla CoffeeScript, no frameworks were used. I did use the excellent [howler.js](http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library) web audio lib though.
-
+It's written in vanilla CoffeeScript, no frameworks were used.
